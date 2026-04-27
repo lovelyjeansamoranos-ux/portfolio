@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cyberpunk portfolio showcasing skills and projects">
+    <title>NEON_PORTFOLIO_v2.077</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader" role="dialog" aria-label="Loading screen" aria-live="polite">
+        <div class="loader-content">
+            <div class="loader-ring" aria-hidden="true"></div>
+            <div class="loader-text">
+                <span class="loader-title">INITIALIZING SYSTEM</span>
+                <span class="loader-percent" id="loaderPercent" aria-live="assertive">0%</span>
+            </div>
+            <div class="loader-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Loading progress">
+                <div class="loader-progress" id="loaderProgress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NoScript Fallback -->
+    <noscript>
+        <style>
+            .preloader { display: none !important; }
+            .no-js-warning {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #0a0a0a;
+                color: #ff0033;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'JetBrains Mono', monospace;
+                text-align: center;
+                padding: 2rem;
+                z-index: 999999;
+            }
+        </style>
+        <div class="no-js-warning">
+            <div>
+                <h2>⚠️ JAVASCRIPT REQUIRED</h2>
+                <p>This cyberpunk experience requires JavaScript to function properly.</p>
+                <p>Please enable JavaScript in your browser settings.</p>
+            </div>
+        </div>
+    </noscript>
+
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Moving Canvas Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Decorative Elements -->
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">LOVELY JEAN</span>
+                <span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link"><span class="link-bracket">&gt;</span> HOME</a></li>
+                <li><a href="#about" class="nav-link"><span class="link-bracket">&gt;</span> ABOUT</a></li>
+                <li><a href="#skills" class="nav-link"><span class="link-bracket">&gt;</span> SKILLS</a></li>
+                <li><a href="#projects" class="nav-link"><span class="link-bracket">&gt;</span> PROJECTS</a></li>
+                <li><a href="#contact" class="nav-link"><span class="link-bracket">&gt;</span> CONTACT</a></li>
+            </ul>
+        </div>
+        <div class="nav-status-line"></div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section home-section">
+            <div class="container">
+                <div class="home-content">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">Potfolio</span>
+                    </div>
+                    <h1 class="home-title glitch-text" data-text=" Lovely Jean">
+                        <span class="highlight" data-text="_HELLO">Lovely Jean</span>
+                    </h1>
+                    <p class="home-subtitle typing-effect" data-text="[ FULL STACK DEVELOPER ]">
+                        <span class="bracket">[</span> FULL STACK DEVELOPER <span class="bracket">]</span>
+                        <span class="cursor">_</span>
+                    </p>
+                    <div class="home-description data-corruption">
+                        <span class="line-num"></span>
+                        <p>As a programmer, I write code to build websites and software that work smoothly and solve real problems. I use HTML, CSS, and JavaScript to create the structure, design, and functionality, making sure everything is easy to use. Programming is a team effort, and we continuously learn and adapt to new technologies to create better solutions.
+</p>
+                    </div>
+                    <div class="home-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <span class="btn-text">ACCESS_PROJECTS</span>
+                            <span class="btn-glitch"></span>
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <span class="btn-text">INITIATE_CONTACT</span>
+                        </a>
+                    </div>
+                    <div class="system-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">SYSTEM.STATUS</span>
+                            <span class="stat-value online">ONLINE</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">UPTIME</span>
+                            <span class="stat-value" id="uptime">00:00:00:00</span>
+                        </div>
+                    </div>
+                </div>
+                    <div class="home-image">
+                        <div class="holographic-frame">
+                            <div class="frame-corner tl"></div>
+                            <div class="frame-corner tr"></div>
+                            <div class="frame-corner bl"></div>
+                            <div class="frame-corner br"></div>
+                            <div class="holographic-content">
+                                <img src=".vscode/bf0ae86a-dc5e-43fb-97ac-08f63012c2e9-removebg-preview.png" alt="Your Name - Operator" class="profile-img">
+                                <div class="holo-scanline"></div>
+                            </div>
+                        </div>
+                        <div class="data-stream">
+                            <span>01010010</span>
+                            <span>01010101</span>
+                            <span>01010011</span>
+                        </div>
+                    </div>
+                        <div class="holo-scanline"></div>
+                    </div>
+                    <div class="data-stream">
+                        <span>01010010</span>
+                        <span>01010101</span>
+                        <span>01010011</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-bracket">&lt;</span>
+                    ABOUT_PROTOCOL
+                    <span class="title-bracket">/&gt;</span>
+                </h2>
+                        <div class="about-image">
+                            <div class="image-wrapper cyber-border">
+                                <img src=".vscode/bf0ae86a-dc5e-43fb-97ac-08f63012c2e9-removebg-preview.png" alt="Lovely Jean - Operator" class="about-photo">
+                                <!-- Cyberpunk corner brackets -->
+                                <div class="corner-bracket tl"></div>
+                                <div class="corner-bracket tr"></div>
+                                <div class="corner-bracket bl"></div>
+                                <div class="corner-bracket br"></div>
+                                <div class="image-overlay"></div>
+                            </div>
+                            <div class="scan-beam"></div>
+                        </div>
+
+                        <!-- Profile Text (Right Side) -->
+                        <div class="about-text">
+                            <h3 class="cyber-heading">
+                                <span class="heading-prefix">//</span> OPERATOR_PROFILE
+                            </h3>
+                            <div class="terminal-output">
+                                <div class="output-line" data-line="1">
+                                    <span class="prompt">&gt;</span>
+                                    <span class="text">I am a netrunner navigating the digital frontier. Two decades of experience breaching the boundaries of code and creativity.</span>
+                                </div>
+                                <div class="output-line" data-line="2">
+                                    <span class="prompt">&gt;</span>
+                                    <span class="text">Specializing in full-stack architecture and neural interface design. My code doesn't just run — it sings in the electric rain.</span>
+                                </div>
+                                <div class="output-line" data-line="3">
+                                    <span class="prompt">&gt;</span>
+                                    <span class="text">Currently accepting contracts in the Neo-Tokyo district. Let's build something that echoes through the datasphere.</span>
+                                </div>
+                            </div>
+                            <div class="about-stats cyber-stats">
+                                <div class="stat-item">
+                                    <div class="stat-ring">
+                                        <svg viewBox="0 0 36 36">
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#c41e3a" stroke-width="2"
+                                                   stroke-dasharray="80 20" stroke-linecap="round"/>
+                                        </svg>
+                                        <span class="stat-inner">20+</span>
+                                    </div>
+                                    <span class="stat-label">YEARS.EXE</span>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-ring">
+                                        <svg viewBox="0 0 36 36">
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#c41e3a" stroke-width="2"
+                                                   stroke-dasharray="75 25" stroke-linecap="round"/>
+                                        </svg>
+                                        <span class="stat-inner">500+</span>
+                                    </div>
+                                    <span class="stat-label">PROJECTS.DAT</span>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-ring">
+                                        <svg viewBox="0 0 36 36">
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+                                            <circle cx="18" cy="18" r="16" fill="none" stroke="#c41e3a" stroke-width="2"
+                                                   stroke-dasharray="90 10" stroke-linecap="round"/>
+                                        </svg>
+                                        <span class="stat-inner">99%</span>
+                                    </div>
+                                    <span class="stat-label">SATISFACTION</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-bracket">&lt;</span>
+                    MODULES_LOADED
+                    <span class="title-bracket">/&gt;</span>
+                </h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">UI/UX.DESIGN</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="90"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_90</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">FRONTEND.CORE</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="95"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_95</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">BACKEND.SYS</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="85"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_85</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">MOBILE.OS</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="80"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_80</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">DEVOPS.GRID</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="75"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_75</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">◈</div>
+                            <div class="skill-name">DATA.MINER</div>
+                        </div>
+                        <div class="skill-bar-cyber">
+                            <div class="skill-progress" data-level="70"></div>
+                            <div class="skill-glow"></div>
+                        </div>
+                        <div class="skill-meta">
+                            <span class="skill-level">LEVEL_70</span>
+                            <span class="skill-status">ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-bracket">&lt;</span>
+                    MISSION_LOG
+                    <span class="title-bracket">/&gt;</span>
+                </h2>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="image-wrapper cyber-border project-img">
+                                <div class="holo-display">
+                                    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="250" fill="rgba(0,0,0,0.8)"/>
+                                        <rect x="50" y="50" width="300" height="150" rx="5" fill="none" stroke="#c41e3a" stroke-width="1"/>
+                                        <text x="200" y="130" font-family="monospace" fill="#c41e3a" text-anchor="middle" font-size="24">ECOM.exe</text>
+                                        <line x1="50" y1="200" x2="350" y2="200" stroke="#c41e3a" stroke-width="1"/>
+                                        <line x1="50" y1="210" x2="350" y2="210" stroke="#c41e3a" stroke-width="1" opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="project-status">STATUS: DEPLOYED</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>E-COMMERCE_PLATFORM</h3>
+                            <p>Full-spectrum retail engine with neural-link inventory, quantum-secure transaction processing, and adaptive AI recommendation matrix.</p>
+                            <div class="project-tags">
+                                <span class="tag">REACT</span>
+                                <span class="tag">NODE.JS</span>
+                                <span class="tag">MONGODB</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <span class="link-text">ACCESS DATAFILE</span>
+                                <span class="link-arrow">&gt;&gt;</span>
+                            </a>
+                        </div>
+                        <div class="project-grid-lines"></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="image-wrapper cyber-border project-img">
+                                <div class="holo-display">
+                                    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="250" fill="rgba(0,0,0,0.8)"/>
+                                        <rect x="50" y="50" width="300" height="150" rx="5" fill="none" stroke="#c41e3a" stroke-width="1"/>
+                                        <text x="200" y="130" font-family="monospace" fill="#c41e3a" text-anchor="middle" font-size="24">TASK.exe</text>
+                                        <line x1="50" y1="200" x2="350" y2="200" stroke="#c41e3a" stroke-width="1"/>
+                                        <line x1="50" y1="210" x2="350" y2="210" stroke="#c41e3a" stroke-width="1" opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="project-status">STATUS: DEPLOYED</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>TASK_MANAGEMENT_SYSTEM</h3>
+                            <p>Collaborative mission control with drag-drop interface, realtime sync, and predictive timeline optimization algorithms.</p>
+                            <div class="project-tags">
+                                <span class="tag">VUE.JS</span>
+                                <span class="tag">FIREBASE</span>
+                                <span class="tag">TAILWIND</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <span class="link-text">ACCESS DATAFILE</span>
+                                <span class="link-arrow">&gt;&gt;</span>
+                            </a>
+                        </div>
+                        <div class="project-grid-lines"></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="image-wrapper cyber-border project-img">
+                                <div class="holo-display">
+                                    <svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="400" height="250" fill="rgba(0,0,0,0.8)"/>
+                                        <rect x="50" y="50" width="300" height="150" rx="5" fill="none" stroke="#c41e3a" stroke-width="1"/>
+                                        <text x="200" y="130" font-family="monospace" fill="#c41e3a" text-anchor="middle" font-size="24">HEALTH.exe</text>
+                                        <line x1="50" y1="200" x2="350" y2="200" stroke="#c41e3a" stroke-width="1"/>
+                                        <line x1="50" y1="210" x2="350" y2="210" stroke="#c41e3a" stroke-width="1" opacity="0.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="project-status">STATUS: DEPLOYED</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>BIOMETRIC_TRACKER</h3>
+                            <p>Neural-linked health monitoring with biometric sensors, predictive analytics, and personalized optimization protocols.</p>
+                            <div class="project-tags">
+                                <span class="tag">REACT_NATIVE</span>
+                                <span class="tag">GRAPHQL</span>
+                                <span class="tag">POSTGRESQL</span>
+                            </div>
+                            <a href="#" class="project-link">
+                                <span class="link-text">ACCESS DATAFILE</span>
+                                <span class="link-arrow">&gt;&gt;</span>
+                            </a>
+                        </div>
+                        <div class="project-grid-lines"></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-bracket">&lt;</span>
+                    UPLINK_INTERFACE
+                    <span class="title-bracket">/&gt;</span>
+                </h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3 class="cyber-heading">
+                            <span class="heading-prefix">//</span> ESTABLISH_UPLINK
+                        </h3>
+                        <p class="data-text">Ready to establish secure connection. Transmit your coordinates and mission parameters.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon">◉</span>
+                                <div>
+                                    <strong class="cyber-label">COMMS_CHANNEL</strong>
+                                    <p class="cyber-value">lovelyjeansamoranos@smcbi.edu.ph</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon">◉</span>
+                                <div>
+                                    <strong class="cyber-label">DIRECT_LINE</strong>
+                                    <p class="cyber-value">09123456121</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon">◉</span>
+                                <div>
+                                    <strong class="cyber-label">LOCATION_NODE</strong>
+                                    <p class="cyber-value">Poblacion uno, Bansalan</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="GitHub">
+                                <span class="link-icon">⬡</span>
+                                <span>GITHUB</span>
+                            </a>
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <span class="link-icon">⬡</span>
+                                <span>LINKEDIN</span>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <span class="link-icon">⬡</span>
+                                <span>TWITTER</span>
+                            </a>
+                        </div>
+                    </div>
+                    <form class="contact-form cyber-form" id="contactForm">
+                        <div class="form-header">
+                            <span class="form-title">TRANSMIT_MESSAGE</span>
+                            <span class="form-status">AWAITING_INPUT</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="cyber-label">IDENTIFIER</label>
+                            <input type="text" id="name" name="name" required class="cyber-input" placeholder="ENTER_NAME...">
+                            <div class="input-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="cyber-label">COMMS_ADDR</label>
+                            <input type="email" id="email" name="email" required class="cyber-input" placeholder="EMAIL@DOMAIN.COM">
+                            <div class="input-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="cyber-label">SUBJECT_PROTOCOL</label>
+                            <input type="text" id="subject" name="subject" required class="cyber-input" placeholder="MISSION_BRIEF...">
+                            <div class="input-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="cyber-label">DATA_PACKET</label>
+                            <textarea id="message" name="message" rows="5" required class="cyber-textarea" placeholder="TRANSMIT_YOUR_MESSAGE..."></textarea>
+                            <div class="input-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary cyber-submit">
+                            <span class="btn-text">TRANSMIT</span>
+                            <span class="btn-loading">
+                                <span class="loading-dot"></span>
+                                <span class="loading-dot"></span>
+                                <span class="loading-dot"></span>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="copyright">
+                    <span class="copy-symbol">©</span> 2026 lOVELY JEAN. ALL_RIGHTS_RESERVED
+                </p>
+                <div class="footer-divider"></div>
+                <p class="footer-tagline">
+                    <span class="tag-prefix">&gt;&gt;</span> SYSTEM_BUILT_WITH_NEON_PASSION
+                    <span class="tag-prefix">&lt;&lt;</span>
+                </p>
+            </div>
+            <div class="footer-grid"></div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <span class="scroll-icon">▲</span>
+        <span class="scroll-tooltip">RETURN_TO_TOP</span>
+    </button>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
